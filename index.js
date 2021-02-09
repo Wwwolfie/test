@@ -16,4 +16,4 @@ app.get('/', (req, res) => {
 })
 
 console.log('go!')
-server.listen(8080);
+server.listen(process.env.PORT || 8080);
