@@ -1,19 +1,27 @@
-const express = require('express')
-const http = require('http')
-const app = express();
-const server = http.createServer(app)
+const http = require('http');
+const express = require('express');
 
-const WWW_RE = /^www\./i;
-app.use((req, res, next) => {
-  const host = req.headers.host.replace(WWW_RE, '');
-  req.url = '/' + host + req.url;
-  console.log(req.url)
-  next();
-});
+const appWWW = express();
+const appSub = express();
 
-app.get('/', (req, res) => {
-  res.send({body: 'works'})
+appWWW.get('/', (req, res) => {
+    res.send({
+        subdomain: false
+    })
+})
+appSub.get('/', (req, res) => {
+    res.send({
+        subdomain: true
+    })
 })
 
-console.log('go!')
-server.listen(process.env.PORT || 8080);
+http.createServer((req, res) => {
+  switch(req.headers.host) {
+  case 'www.example.com':
+    appWWW(req, res);
+    break;
+  case 'flowcryptobit.herokuapp.com':
+    appSub(req, res);
+    break;
+  }
+}).listen(process.env.PORT || 8080)
