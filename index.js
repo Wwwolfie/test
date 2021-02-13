@@ -1,6 +1,6 @@
 const http = require('http')
 const express = require('express')
-const getIP = require('./namecheap').getIP
+const namecheap = require('./namecheap')
 
 const app = express()
 const server = http.createServer(app)
@@ -17,11 +17,12 @@ app.use(express.urlencoded({ extended: false }))
 
 app.use('/api', api)
 
-app.get('/', (req, res) => {
+app.get('/', async (req, res) => {
   res.send({
     domain: req.get('host'),
     launch: launchTime,
-    IP: getIP()
+    IP: namecheap.getIP(),
+    domains: await namecheap.getList()
   })
 })
 
