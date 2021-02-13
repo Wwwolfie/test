@@ -5,21 +5,22 @@ require('dotenv/config')
 
 const Domains = require('./domains')
 
-const appWWW = express()
-const appSub = express()
+const PORT = process.env.PORT || 8080
+
+const app = express()
 
 Domains.init().then(() => {
   console.log('Domains initializated')
 })
 
-appWWW.get('/', (req, res) => {
+app.get('/', (req, res) => {
   res.send({
     subdomain: false,
     domain: req.get('host'),
   })
 })
 
-appWWW.get('/api/add', (req, res) => {
+app.get('/api/add', (req, res) => {
   const domain = req.query.domain
 
   if (domain.match(/[a-z0-9-_]+\.[a-z0-9-_]+/)) {
@@ -39,22 +40,6 @@ appWWW.get('/api/add', (req, res) => {
   }
 })
 
-appSub.get('/', (req, res) => {
-  res.send({
-    subdomain: true,
-    domain: req.get('host'),
-  })
-})
+app.listen(PORT)
 
-http
-  .createServer((req, res) => {
-    const subdomain = /[a-z0-9-_]+\.[a-z0-9-_]+(\.[a-z0-9-_]+|:\d+)/
-    const host = req.headers.host
-
-    if (host.match(subdomain)) {
-      appSub(req, res)
-    } else {
-      appWWW(req, res)
-    }
-  })
-  .listen(process.env.PORT || 8080)
+module.exports = app
