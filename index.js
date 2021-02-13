@@ -1,5 +1,6 @@
 const http = require('http')
 const express = require('express')
+const getIP = require('./namecheap').getIP
 
 const app = express()
 const server = http.createServer(app)
@@ -20,6 +21,7 @@ app.get('/', (req, res) => {
   res.send({
     domain: req.get('host'),
     launch: launchTime,
+    IP: getIP()
   })
 })
 
