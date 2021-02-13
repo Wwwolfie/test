@@ -1,7 +1,7 @@
 const axios = require('axios')
 
 const headers = {
-  Authorization: 'Bearer ' + process.env.VERCEL_API_KEY,
+  Authorization: 'Bearer ' + process.env.API_KEY,
 }
 
 var project_id = ''
