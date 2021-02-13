@@ -18,11 +18,13 @@ app.use(express.urlencoded({ extended: false }))
 app.use('/api', api)
 
 app.get('/', async (req, res) => {
+  const domains = namecheap.getIP() ? await namecheap.getList() : []
+
   res.send({
     domain: req.get('host'),
     launch: launchTime,
     IP: namecheap.getIP(),
-    domains: await namecheap.getList()
+    domains,
   })
 })
 

@@ -3,7 +3,7 @@ const IP = require('./ip')
 
 const API_USER = process.env.NAMECHEAP_API_USER
 const API_KEY = process.env.NAMECHEAP_API_KEY
-var CLIENT_IP = '76.76.21.21'
+var CLIENT_IP = ''
 
 async function main() {
   CLIENT_IP = await IP.get()
