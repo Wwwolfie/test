@@ -13,5 +13,9 @@
       "dest": "index.js"
     }
   ],
-  "rewrites": [{ "source": "/api/(.*)", "destination": "/api" }]
+  "functions": {
+    "api/(.*)": {
+      "maxDuration": 30
+    }
+  }
 }
