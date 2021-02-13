@@ -1,4 +1,3 @@
-const http = require('http')
 const express = require('express')
 
 require('dotenv/config')
@@ -17,18 +16,13 @@ const launchTime = +new Date()
 
 app.get('/', (req, res) => {
   res.send({
-    subdomain: false,
     domain: req.get('host'),
     launch: launchTime,
   })
 })
 
-app.get('/api/add', (req, res) => {
+app.get('/add', (req, res) => {
   const domain = req.query.domain
-
-  res.send({ message: 'OKAY' })
-
-  return
 
   if (domain.match(/[a-z0-9-_]+\.[a-z0-9-_]+/)) {
     Domains.assignDomain(domain)
