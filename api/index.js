@@ -1,19 +1,13 @@
 const express = require('express')
 const router = new express.Router()
 
-// const Domains = require('../domains')
+const Domains = require('../domains')
 
-// Domains.init().then(() => {
-//   console.log('Domains initializated')
-// })
+Domains.init().then(() => {
+  console.log('Domains initializated')
+})
 
 router.get('/add', (req, res) => {
-  res.json({
-    ok: true,
-  })
-
-  return
-
   const domain = req.query.domain
 
   if (domain && domain.match(/[a-z0-9-_]+\.[a-z0-9-_]+/)) {
