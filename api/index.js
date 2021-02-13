@@ -8,10 +8,9 @@ Domains.init().then(() => {
 })
 
 router.get('/add', (req, res) => {
-  launchTime = +new Date()
   const domain = req.query.domain
 
-  if (domain.match(/[a-z0-9-_]+\.[a-z0-9-_]+/)) {
+  if (domain && domain.match(/[a-z0-9-_]+\.[a-z0-9-_]+/)) {
     Domains.assignDomain(domain)
       .then((response) => {
         res.send(response)

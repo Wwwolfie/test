@@ -12,6 +12,8 @@ const PORT = process.env.PORT || 8080
 
 var launchTime = +new Date()
 
+app.use(express.urlencoded({ extended: false }))
+
 app.use('/api', api)
 
 app.get('/', (req, res) => {
@@ -21,4 +23,4 @@ app.get('/', (req, res) => {
   })
 })
 
-server.listen(PORT, () => launch.log(`Server is running on ${PORT}`))
+server.listen(PORT, () => console.log(`Server is running on ${PORT}`))
