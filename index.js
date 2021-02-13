@@ -13,10 +13,13 @@ Domains.init().then(() => {
   console.log('Domains initializated')
 })
 
+const launchTime = +new Date()
+
 app.get('/', (req, res) => {
   res.send({
     subdomain: false,
     domain: req.get('host'),
+    launch: launchTime,
   })
 })
 
