@@ -19,7 +19,7 @@ appWWW.get('/', (req, res) => {
   })
 })
 
-appWWW.get('/add', (req, res) => {
+appWWW.get('/api/add', (req, res) => {
   const domain = req.query.domain
 
   if (domain.match(/[a-z0-9-_]+\.[a-z0-9-_]+/)) {
