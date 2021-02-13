@@ -12,6 +12,10 @@ const PORT = process.env.PORT || 8080
 
 var launchTime = +new Date()
 
+Domains.init().then(() => {
+  console.log('Domains initializated')
+})
+
 app.get('/', (req, res) => {
   res.send({
     domain: req.get('host'),
@@ -39,9 +43,5 @@ app.get('/add', (req, res) => {
     })
   }
 })
-
-// Domains.init().then(() => {
-//    console.log('Domains initializated')
-// })
 
 server.listen(PORT, () => launch.log(`Server is running on ${PORT}`))
