@@ -1,6 +1,8 @@
 const namecheapApi = require('namecheap-api')
 const IP = require('./ip')
 
+require('dotenv/config')
+
 const API_USER = process.env.NAMECHEAP_API_USER
 const API_KEY = process.env.NAMECHEAP_API_KEY
 var CLIENT_IP = ''
