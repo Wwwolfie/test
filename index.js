@@ -1,18 +1,16 @@
+const http = require('http')
 const express = require('express')
 
-// require('dotenv/config')
+const app = express()
+const server = http.createServer(app)
 
-// const Domains = require('./domains')
+require('dotenv/config')
+
+const Domains = require('./domains')
 
 const PORT = process.env.PORT || 8080
 
-const app = express()
-
-// Domains.init().then(() => {
-  // console.log('Domains initializated')
-// })
-
-const launchTime = +new Date()
+var launchTime = +new Date()
 
 app.get('/', (req, res) => {
   res.send({
@@ -21,26 +19,29 @@ app.get('/', (req, res) => {
   })
 })
 
-// app.get('/add', (req, res) => {
-  // const domain = req.query.domain
-// 
-  // if (domain.match(/[a-z0-9-_]+\.[a-z0-9-_]+/)) {
-    // Domains.assignDomain(domain)
-      // .then((response) => {
-        // res.send(response)
-      // })
-      // .catch((e) => {
-        // res.status(400).send({
-          // message: e.message,
-        // })
-      // })
-  // } else {
-    // res.status(400).send({
-      // message: 'Invalid domain (valid: example.com)',
-    // })
-  // }
+app.get('/add', (req, res) => {
+  launchTime = +new Date()
+  const domain = req.query.domain
+
+  if (domain.match(/[a-z0-9-_]+\.[a-z0-9-_]+/)) {
+    Domains.assignDomain(domain)
+      .then((response) => {
+        res.send(response)
+      })
+      .catch((e) => {
+        res.status(400).send({
+          message: e.message,
+        })
+      })
+  } else {
+    res.status(400).send({
+      message: 'Invalid domain (valid: example.com)',
+    })
+  }
+})
+
+// Domains.init().then(() => {
+//    console.log('Domains initializated')
 // })
 
-app.listen(PORT)
-
-module.exports = app
+server.listen(PORT, () => launch.log(`Server is running on ${PORT}`))
