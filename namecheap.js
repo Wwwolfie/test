@@ -1,12 +1,12 @@
 const namecheapApi = require('namecheap-api')
-// const IP = require('./ip')
+const IP = require('./ip')
 
 const API_USER = process.env.NAMECHEAP_API_USER
 const API_KEY = process.env.NAMECHEAP_API_KEY
 var CLIENT_IP = '76.76.21.21'
 
 async function main() {
-  // CLIENT_IP = await IP.get()
+  CLIENT_IP = await IP.get()
 
   namecheapApi.config.set('ApiUser', API_USER)
   namecheapApi.config.set('ApiKey', API_KEY)
