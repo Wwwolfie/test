@@ -1,7 +1,7 @@
 const express = require('express')
 const router = new express.Router()
 
-const Domains = require('./domains')
+const Domains = require('../domains')
 
 Domains.init().then(() => {
   console.log('Domains initializated')
