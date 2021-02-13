@@ -1,6 +1,8 @@
 const express = require('express')
 const router = new express.Router()
 
+require('dotenv/config')
+
 const Domains = require('../domains')
 
 Domains.init().then(() => {
