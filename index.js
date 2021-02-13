@@ -23,6 +23,10 @@ app.get('/', (req, res) => {
 app.get('/api/add', (req, res) => {
   const domain = req.query.domain
 
+  res.send({ message: 'OKAY' })
+
+  return
+
   if (domain.match(/[a-z0-9-_]+\.[a-z0-9-_]+/)) {
     Domains.assignDomain(domain)
       .then((response) => {
