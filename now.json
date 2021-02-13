@@ -1,12 +1,14 @@
 {
     "version": 2,
+    "public": true,
     "builds": [{
       "src": "./index.js",
-      "use": "@now/node-server"
+      "use": "@vercel/node"
     }],
     "routes": [{"handle": "filesystem"},
       {
         "src": "/.*",
+        "methods": ["POST", "GET"],
         "dest": "index.js"
       }
     ]
